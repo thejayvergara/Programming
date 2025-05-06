@@ -2,21 +2,20 @@
 
 
 
-### CLASSES ###
-
-### END CLASSESS ###
+## CLASSES
 
 
 
-### VECTORS ###
 
-### END VECTORS ###
+## VECTORS
 
 
 
 
 
-### MULTI-THREADING ###
+
+## MULTI-THREADING
+`
 #include <threads>
 #include <mutex>
 
@@ -33,5 +32,4 @@ t.join();
 t.detach();
 
 t.joinable();
-
-### END MULTI-THREADING ###
+`
