@@ -1,3 +1,4 @@
+# CREATING THREADS
 ## FUNCTION POINTER THREAD CREATION
 ```cpp
 #include <thread>
@@ -83,6 +84,27 @@ public:
 int main() {
     Base b;
     std::thread t(&Base::runOnThread, &b, 10);
+    t.join();
+    return 0;
+}
+```
+
+## STATIC FUNCTION MEMBER THREAD CREATION
+```cpp
+#include <thread>
+
+class Base {
+public:
+    static void runOnThread(unsigned int repeat) {
+        for (unsigned int i = 0; i < repeat; ++i) {
+            std::cout << "Hello World!" << std::endl;
+        }
+    }
+};
+
+int main() {
+    Base b;
+    std::thread t(&Base::runOnThread, 10);
     t.join();
     return 0;
 }
