@@ -1,5 +1,4 @@
-# Creating Threads
-## Function Pointer Thread Creation
+# Function Pointer Thread Creation
 ```cpp
 #include <thread>
 
@@ -16,8 +15,8 @@ int main() {
 }
 ```
 
-## Lambda Thread Creation
-### Example 1
+# Lambda Thread Creation
+## Example 1
 ```cpp
 #include <thread>
 
@@ -33,7 +32,7 @@ int main() {
 }
 ```
 
-### Example 2
+## Example 2
 ```cpp
 #include <thread>
 
@@ -48,8 +47,10 @@ int main() {
 }
 ```
 
-## Function Object Thread Creation
+# Function Object Thread Creation
 ```cpp
+#include <thread>
+
 class Base {
 public:
     void operator()(unsigned int repeat) {
@@ -61,6 +62,27 @@ public:
 
 int main() {
     std::thread t((Base()), 10);
+    t.join();
+    return 0;
+}
+```
+
+# Non-Static Function Member Thread Creation
+```cpp
+#include <thread>
+
+class Base {
+public:
+    void runOnThread(unsigned int repeat) {
+        for (unsigned int i = 0; i < repeat; ++i) {
+            std::cout << "Hello World!" << std::endl;
+        }
+    }
+};
+
+int main() {
+    Base b;
+    std::thread t(&Base::runOnThread, &b, 10);
     t.join();
     return 0;
 }
