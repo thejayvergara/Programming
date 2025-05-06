@@ -40,7 +40,8 @@ void runOnThread() {
 int main() {
     unsigned int numOfThreads = 3;
 
-    std::thread threads[numOfThreads];
+    std::thread* threads = new std::thread[numOfThreads];
+
     for (unsigned int i = 0; i < numOfThreads; i++) {
         threads[i] = std::thread(runOnThread);
     }
@@ -56,9 +57,11 @@ int main() {
 
 ### Other Methods
 ```cpp
-std::this_thread::sleep_for(3s);
+#include chrono
+std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
 t.detach();
-t.joinable;
+t.joinable();
 ```
 
 ## SORTING METHODS
