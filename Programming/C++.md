@@ -25,13 +25,14 @@ std::vector<std::vector<unsigned int>> uintVectVect;
 ```cpp
 #include <thread>
 #include <mutex>
+#include <condition_variable>
 
 // Protects shared data from being accessed at the same time
-std::mutex variableLock;
+std::mutex m;
 
 // Function to be ran by each thread
 void runOnThread() {
-    std::lock_guard<std::mutex> lock(variableLock);
+    std::lock_guard<std::mutex> lock(m);
     unsigned int id = std::this_thread::get_id();
     std::cout << id << std::cout<< endl;
 }
@@ -62,4 +63,22 @@ std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 t.detach();
 t.joinable();
+```
+
+
+### Function Pointer Thread Creation
+```cpp
+#include <thread>
+
+void runOnThread(int repeat) {
+    for (unsigned int i = 0; i < repeat; ++i) {
+        std::cout << "Hello World!" << std::endl;
+    }
+}
+
+int main() {
+    std::thread t(runOnThread, 5);
+    t.join();
+    return 0;
+}
 ```
