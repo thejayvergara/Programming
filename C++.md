@@ -1,6 +1,9 @@
 # C++ CHEATSHEET
 
 ## CLASSES
+### General Example
+```cpp
+```
 
 
 
@@ -10,7 +13,9 @@
 #include <vector>
 
 // Vector initializations
-std::vector<unsigned int> vectNumbers;
+std::vector<unsigned int> uintVect;
+std::vector<std::thread> threadVect;
+std::vector<std::vector<unsigned int>> uintVectVect;
 ```
 
 
@@ -54,4 +59,9 @@ int main() {
 std::this_thread::sleep_for(3s);
 t.detach();
 t.joinable;
+```
+
+## SORTING METHODS
+### Bubble Sort
+```cpp
 ```
