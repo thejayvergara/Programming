@@ -1,4 +1,4 @@
-# Function Pointer Thread Creation
+# FUNCTION POINTER THREAD CREATION
 ```cpp
 #include <thread>
 
@@ -15,8 +15,7 @@ int main() {
 }
 ```
 
-# Lambda Thread Creation
-## Example 1
+# LAMBDA THREAD CREATION
 ```cpp
 #include <thread>
 
@@ -47,7 +46,7 @@ int main() {
 }
 ```
 
-# Function Object Thread Creation
+# FUNCTION OBJECT THREAD CREATION
 ```cpp
 #include <thread>
 
@@ -67,7 +66,7 @@ int main() {
 }
 ```
 
-# Non-Static Function Member Thread Creation
+# NON-STATIC FUNCTION MEMBER THREAD CREATION
 ```cpp
 #include <thread>
 
