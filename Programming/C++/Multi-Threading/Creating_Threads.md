@@ -3,6 +3,7 @@
 ```cpp
 #include <thread>
 
+// Displays "Hello World!" multiple times based on the passed argument
 void runOnThread(int repeat) {
     for (unsigned int i = 0; i < repeat; ++i) {
         std::cout << "Hello World!" << std::endl;
@@ -10,8 +11,8 @@ void runOnThread(int repeat) {
 }
 
 int main() {
-    std::thread t(runOnThread, 5);
-    t.join();
+    std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -22,13 +23,14 @@ int main() {
 #include <thread>
 
 int main() {
+    // Displays "Hello World!" multiple times based on the passed argument
     auto runOnThread = [](unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
             std::cout << "Hello World!" << std::endl;
         }
     }
-    std::thread t(runOnThread, 5);
-    t.join();
+    std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -38,12 +40,13 @@ int main() {
 #include <thread>
 
 int main() {
+    // Displays "Hello World!" 5 times directly on thread
     std::thread t([](unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
             std::cout << "Hello World!" << std::endl;
         }
     }, 5);
-    t.join();
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -54,6 +57,7 @@ int main() {
 
 class Base {
 public:
+    // Displays "Hello World!" multiple times based on the passed argument
     void operator()(unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
             std::cout << "Hello World!" << std::endl;
@@ -62,8 +66,8 @@ public:
 };
 
 int main() {
-    std::thread t((Base()), 10);
-    t.join();
+    std::thread t((Base()), 10);    // Execute Base Class function overload on a thread
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -74,6 +78,7 @@ int main() {
 
 class Base {
 public:
+    // Displays "Hello World!" multiple times based on the passed argument
     void runOnThread(unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
             std::cout << "Hello World!" << std::endl;
@@ -82,9 +87,9 @@ public:
 };
 
 int main() {
-    Base b;
-    std::thread t(&Base::runOnThread, &b, 10);
-    t.join();
+    Base b; // Create an instance of Base Class
+    std::thread t(&Base::runOnThread, &b, 5);  // Execute Base Class' runOnThread(5) non-static function
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -95,6 +100,7 @@ int main() {
 
 class Base {
 public:
+    // Displays "Hello World!" multiple times based on the passed argument
     static void runOnThread(unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
             std::cout << "Hello World!" << std::endl;
@@ -103,9 +109,9 @@ public:
 };
 
 int main() {
-    Base b;
-    std::thread t(&Base::runOnThread, 10);
-    t.join();
+    Base b; // Create an instance of Base Class
+    std::thread t(&Base::runOnThread, 10);  // Execute Base Class' runOnThread(5) static function
+    t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
