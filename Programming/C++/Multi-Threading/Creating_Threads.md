@@ -1,4 +1,4 @@
-# FUNCTION POINTER THREAD CREATION
+## FUNCTION POINTER THREAD CREATION
 ```cpp
 #include <thread>
 
@@ -15,7 +15,8 @@ int main() {
 }
 ```
 
-# LAMBDA THREAD CREATION
+## LAMBDA THREAD CREATION
+### Example 1
 ```cpp
 #include <thread>
 
@@ -31,7 +32,7 @@ int main() {
 }
 ```
 
-## Example 2
+### Example 2
 ```cpp
 #include <thread>
 
@@ -46,7 +47,7 @@ int main() {
 }
 ```
 
-# FUNCTION OBJECT THREAD CREATION
+## FUNCTION OBJECT THREAD CREATION
 ```cpp
 #include <thread>
 
@@ -66,7 +67,7 @@ int main() {
 }
 ```
 
-# NON-STATIC FUNCTION MEMBER THREAD CREATION
+## NON-STATIC FUNCTION MEMBER THREAD CREATION
 ```cpp
 #include <thread>
 
