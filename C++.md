@@ -15,7 +15,7 @@
 
 
 ## MULTI-THREADING
-`
+```
 #include <threads>
 #include <mutex>
 
@@ -32,4 +32,4 @@ t.join();
 t.detach();
 
 t.joinable();
-`
+```
