@@ -48,7 +48,7 @@ int main() {
 
     std::vector<std::thread> threads;   // Create a vector of threads
     for (unsigned int i = 0; i < 3; ++i) {
-        threads.push_back(std::thread(runOnThread, 5))  // Add a thread to the vector to execute runOnThread(5)
+        threads.emplace_back(runOnThread, 5)  // Add a thread to the vector to execute runOnThread(5)
     }
 
     // Wait for threads to finish executing
