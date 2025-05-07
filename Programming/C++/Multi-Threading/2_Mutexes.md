@@ -27,7 +27,7 @@ int main() {
 ```
 
 ## try_lock()
-This will only increase counter to roughly 1000 (it will vary) instead of 2000 even though 2 threads are increasing counter due to try_lock() skipping (returning false) when it can't lock the variable.
+The final counter will vary instead of getting 2000 due to try_lock() skipping (returning false) when it can't lock the variable.
 ```cpp
 #include <thread>
 #include <mutex>
