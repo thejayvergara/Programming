@@ -16,8 +16,8 @@ void deposit(unsigned int amount) {
 }
 
 int main() {
-    std::thread t1(deposit, 10);    // Execute deposit(10)
-    std::thread t2(deposit, 15);    // Execute deposit(15)
+    std::thread t1(deposit, 10);    // Execute deposit(10) on a thread
+    std::thread t2(deposit, 15);    // Execute deposit(15) on a thread
     if(t1.joinable){t1.join()};     // Wait for t1 to finish executing
     if(t2.joinable){t2.join()};     // Wait for t2 to finish executing
     std::cout << acctBalance << std::endl;  // Output final acctBalance
@@ -26,3 +26,29 @@ int main() {
 ```
 
 ## try_lock()
+```cpp
+#include <thread>
+#include <mutex>
+
+unsigned int counter = 0;
+std::mutex m;
+
+void increaseCounter() {
+    // Increase counter 1000x
+    for (unsigned int i = 0; i < 1000; ++i) {
+        if(m.try_lock()) {  // Prevent other threads from accessing variables between try_lock() and unlock() if not locked
+            ++counter;  // Increase counter by 1
+            m.unlock(); // Allow other threads from accessing variables between try_lock() and unlock()
+        }
+    }
+}
+
+int main() {
+    std::thread t1(increaseCounter);    // Execute increaseCounter on a thread
+    std::thread t2(increaseCounter);    // Execute increaseCounter on a thread
+    if(t1.joinable()) {t1.join();}      // Wait for t1 to finish executing
+    if(t2.joinable()) {t2.join();}      // Wait for t2 to finish executing
+    std::cout << "Counter increased up to:" << std::endl;   // Output what the counter increased up to
+    return 0;
+}
+```
