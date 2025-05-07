@@ -1,6 +1,6 @@
 # MUTEX: MUTUAL EXCLUSION
 Protects mutually accessed variables from threads. Used to avoid race conditions.
-## lock() and unlock()
+## std::mutex::lock() and std::mutex::unlock()
 Other threads will wait for the variable to be unlocked in order to continue.
 ```cpp
 #include <thread>
@@ -19,14 +19,14 @@ void deposit(unsigned int amount) {
 int main() {
     std::thread t1(deposit, 10);    // Execute deposit(10) on a thread
     std::thread t2(deposit, 15);    // Execute deposit(15) on a thread
-    if(t1.joinable){t1.join()};     // Wait for t1 to finish executing
-    if(t2.joinable){t2.join()};     // Wait for t2 to finish executing
+    if(t1.joinable) t1.join();     // Wait for t1 to finish executing
+    if(t2.joinable) t2.join();     // Wait for t2 to finish executing
     std::cout << acctBalance << std::endl;  // Output final acctBalance
     return 0;
 }
 ```
 
-## mutex::try_lock()
+## std::mutex::try_lock()
 The final counter will vary instead of getting 2000 due to try_lock() skipping (returning `false`) when it can't lock the variable.
 ```cpp
 #include <thread>
@@ -48,15 +48,40 @@ void increaseCounter() {
 int main() {
     std::thread t1(increaseCounter);    // Execute increaseCounter on a thread
     std::thread t2(increaseCounter);    // Execute increaseCounter on a thread
-    if(t1.joinable()) {t1.join();}      // Wait for t1 to finish executing
-    if(t2.joinable()) {t2.join();}      // Wait for t2 to finish executing
+    if(t1.joinable()) t1.join();      // Wait for t1 to finish executing
+    if(t2.joinable()) t2.join();      // Wait for t2 to finish executing
     std::cout << "Counter increased up to:" << counter << std::endl;   // Output what the counter increased up to
     return 0;
 }
 ```
 
-## std::try_lock()
-On success locking all mutexes, returns `-1`. If one mutex fails to lock, it returns a 0-based mutex index number of which it could not lock.
-If it fails lock lock one of the mutexes, it will unlock all the other mutexes that were locked.
+## std::mutex::unique_lock()
+Mutex ownership wrapper.
+
+Locking Strategies (by default uses `lock()`):
+1. `defer_lock` - do not acquire ownership of mutex
+2. `try_to_lock` - try to acquire ownership of mutex without blocking
+3. `adopt_lock` - assume the calling thread already has ownership of the mutex
+### Example 1: Acts the same way as lock() and unlock() without having to explicitly call unlock()
 ```cpp
+#include <thread>
+#include <mutex>
+
+std::mutex m;
+
+void task(const char* threadNumber) {
+    std::unique_lock<mutex> lock(m);
+    for(unsigned int i = 0; i < 5; ++i) {
+        std::cout << threadNumber << "Hello World!" << std::endl;
+    }
+}
+
+int main() {
+    std::thread t1(task, "T1 ");
+    std::thread t2(task, "T2 ");
+    if (t1.joinable()) t1.join();
+    if (t2.joinable()) t2.join();
+
+    return 0;
+}
 ```
