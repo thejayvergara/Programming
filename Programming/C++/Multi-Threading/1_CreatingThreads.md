@@ -12,7 +12,7 @@ void runOnThread(int repeat) {
 
 int main() {
     std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -30,7 +30,7 @@ int main() {
         }
     }
     std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -46,7 +46,7 @@ int main() {
             std::cout << "Hello World!" << std::endl;
         }
     }, 5);
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -67,7 +67,7 @@ public:
 
 int main() {
     std::thread t((Base()), 10);    // Execute Base Class function overload on a thread
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -89,7 +89,7 @@ public:
 int main() {
     Base b; // Create an instance of Base Class
     std::thread t(&Base::runOnThread, &b, 5);  // Execute Base Class' runOnThread(5) non-static function
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
@@ -111,7 +111,7 @@ public:
 int main() {
     Base b; // Create an instance of Base Class
     std::thread t(&Base::runOnThread, 10);  // Execute Base Class' runOnThread(5) static function
-    if (t.joinable()) {t.join();}   // Wait for thread to finish executing
+    if (t.joinable()) t.join();   // Wait for thread to finish executing
     return 0;
 }
 ```
