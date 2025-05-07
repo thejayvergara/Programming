@@ -6,7 +6,7 @@
 // Displays "Hello World!" multiple times based on the passed argument
 void runOnThread(int repeat) {
     for (unsigned int i = 0; i < repeat; ++i) {
-        std::cout << "Hello World!" << std::endl;
+        std::cout << std::this_thread::get_id() << " Hello World!" << std::endl;
     }
 }
 
