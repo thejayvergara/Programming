@@ -11,8 +11,21 @@ void runOnThread(int repeat) {
 }
 
 int main() {
-    std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
-    if (t.joinable()) t.join();   // Wait for thread to finish executing
+    unsigned int numOfThreads = 3;  // Use 3 threads
+    std::thread *threads = new std::thread[numOfThreads];   // Dynamically allocate memory for 3 threads
+
+    // Execute on a defined number of threads
+    for (unsigned int i = 0; i < numOfThreads; ++i) {
+        threads[i] = std::thread(runOnThread, 5);   // Execute runOnThread(5) on a thread
+    }
+
+    // Wait for threads to finish executing
+    for (unsigned int i = 0; i < numOfThreads; ++i) {
+        if (threads[i].joinable()) threads[i].join();
+    }
+
+    delete[] threads;   // Free the dynamically allocated memory
+
     return 0;
 }
 ```
