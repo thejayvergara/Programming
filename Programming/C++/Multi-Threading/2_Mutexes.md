@@ -1,6 +1,7 @@
 # MUTEX: MUTUAL EXCLUSION
 Protects mutually accessed variables from threads. Used to avoid race conditions.
 ## lock() and unlock()
+Other threads will wait for the variable to be unlocked in order to continue.
 ```cpp
 #include <thread>
 #include <mutex>
