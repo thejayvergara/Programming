@@ -48,7 +48,7 @@ int main() {
     std::thread t2(increaseCounter);    // Execute increaseCounter on a thread
     if(t1.joinable()) {t1.join();}      // Wait for t1 to finish executing
     if(t2.joinable()) {t2.join();}      // Wait for t2 to finish executing
-    std::cout << "Counter increased up to:" << std::endl;   // Output what the counter increased up to
+    std::cout << "Counter increased up to:" << counter << std::endl;   // Output what the counter increased up to
     return 0;
 }
 ```
