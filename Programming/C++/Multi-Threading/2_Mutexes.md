@@ -55,14 +55,18 @@ int main() {
 }
 ```
 
+## std::mutex::lock_guard()
+```cpp
+```
+
 ## std::mutex::unique_lock()
-Mutex ownership wrapper.
+Mutex ownership wrapper and a more flexible version of lock_guard().
 
 Locking Strategies (by default uses `lock()`):
 1. `defer_lock` - do not acquire ownership of mutex
 2. `try_to_lock` - try to acquire ownership of mutex without blocking
 3. `adopt_lock` - assume the calling thread already has ownership of the mutex
-### Example 1: Acts the same way as lock() and unlock() without having to explicitly call unlock()
+### Example 1
 ```cpp
 #include <thread>
 #include <mutex>
@@ -70,7 +74,34 @@ Locking Strategies (by default uses `lock()`):
 std::mutex m;
 
 void task(const char* threadNumber) {
-    std::unique_lock<mutex> lock(m);
+    std::unique_lock<mutex> ul(m);  // locks variable and automatically unlocks with destructor
+    // Displays thread number and "Hello World!" 5 times
+    for(unsigned int i = 0; i < 5; ++i) {
+        std::cout << threadNumber << "Hello World!" << std::endl;
+    }
+}
+
+int main() {
+    std::thread t1(task, "T1 ");    // Execute task() with a thread name of T1
+    std::thread t2(task, "T2 ");    // Execute task() with a thread name of T2
+    if (t1.joinable()) t1.join();   // Wait for t1 to finish executing
+    if (t2.joinable()) t2.join();   // Wait for t2 to finish executing
+
+    return 0;
+}
+```
+
+### Example 2
+```cpp
+#include <thread>
+#include <mutex>
+
+std::mutex m;
+
+void task(const char* threadNumber) {
+    std::unique_lock<mutex> ul(m, defer_lock);  
+    // Allows for flexibility with code here over lock_guard()
+    ul.lock();
     for(unsigned int i = 0; i < 5; ++i) {
         std::cout << threadNumber << "Hello World!" << std::endl;
     }
