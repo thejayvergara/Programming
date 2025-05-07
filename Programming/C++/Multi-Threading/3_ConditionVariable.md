@@ -1,5 +1,5 @@
 # CONDITION VARIABLES
-`notify_one()` - Notifies another thread when conditions are met
+`notify_one()` - Notifies another thread when conditions are met \
 `notify_all()` - Notifies all other threads when conditions are met
 
 ```cpp
