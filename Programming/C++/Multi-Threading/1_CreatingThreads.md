@@ -1,5 +1,6 @@
 # CREATING THREADS
 ## FUNCTION POINTER THREAD CREATION
+Using Dynamic Memory Allocation to create multiple threads.
 ```cpp
 #include <thread>
 
@@ -31,19 +32,30 @@ int main() {
 ```
 
 ## LAMBDA THREAD CREATION
+Using Vectors to create multiple threads.
 ### Example 1
 ```cpp
 #include <thread>
+#include <vector>
 
 int main() {
     // Displays "Hello World!" multiple times based on the passed argument
     auto runOnThread = [](unsigned int repeat) {
         for (unsigned int i = 0; i < repeat; ++i) {
-            std::cout << "Hello World!" << std::endl;
+            std::cout << std::this_thread::get_id() << " Hello World!" << std::endl;
         }
     }
-    std::thread t(runOnThread, 5);  // Execute runOnThread(5) on a thread
-    if (t.joinable()) t.join();   // Wait for thread to finish executing
+
+    std::vector<std::thread> threads;   // Create a vector of threads
+    for (unsigned int i = 0; i < 3; ++i) {
+        threads.push_back(std::thread(runOnThread, 5))  // Add a thread to the vector to execute runOnThread(5)
+    }
+
+    // Wait for threads to finish executing
+    for (unsigned int i = 0; i < threads.size(); ++i) {
+        if (threads[i].joinable) threads[i].join(); 
+    }
+
     return 0;
 }
 ```
