@@ -26,8 +26,8 @@ int main() {
 }
 ```
 
-## try_lock()
-The final counter will vary instead of getting 2000 due to try_lock() skipping (returning false) when it can't lock the variable.
+## mutex::try_lock()
+The final counter will vary instead of getting 2000 due to try_lock() skipping (returning `false`) when it can't lock the variable.
 ```cpp
 #include <thread>
 #include <mutex>
@@ -53,4 +53,10 @@ int main() {
     std::cout << "Counter increased up to:" << counter << std::endl;   // Output what the counter increased up to
     return 0;
 }
+```
+
+## std::try_lock()
+On success locking all mutexes, returns `-1`. If one mutex fails to lock, it returns a 0-based mutex index number of which it could not lock.
+If it fails lock lock one of the mutexes, it will unlock all the other mutexes that were locked.
+```cpp
 ```
