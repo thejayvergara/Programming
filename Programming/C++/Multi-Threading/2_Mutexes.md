@@ -10,9 +10,9 @@ std::mutex m;
 
 // Add passed amount to acctBalance
 void deposit(unsigned int amount) {
-    m.lock();   // Prevent other threads from accessing acctBalance (or any other variables in between lock() and unlock())
+    m.lock();   // Prevent other threads from accessing variables between lock() and unlock()
     acctBalance += amount;  // Add amount to acctBalance
-    m.unlock(); // Allow other threads from accessing acctBalance (or any other variables in between lock() and unlock())
+    m.unlock(); // Allow other threads from accessing variables between lock() and unlock()
 }
 
 int main() {
