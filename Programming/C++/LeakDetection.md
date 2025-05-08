@@ -12,6 +12,8 @@ Used for memory leak detection when in debug mode.
 
 int main() {
     ENABLE_LEAK_DETECTION()
+    // YOUR CODE
+    _CrtDumpMemoryLeaks()
     return 0;
 }
 ```
