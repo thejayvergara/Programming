@@ -1,4 +1,5 @@
 # PROMISE AND FUTURE
+Used for asynchronous communication between threads.
 ```cpp
 #include <thread>
 #include <future>
