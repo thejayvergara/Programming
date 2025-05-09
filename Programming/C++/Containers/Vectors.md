@@ -1,6 +1,6 @@
 # VECTORS
 ## Member Functions
-**ITERATORS:**
+**ITERATORS:**  
 `begin()` -- Return iterator to the first element in the vector  
 `end()`  -- Return iterator to the last element in the vector  
 `rbegin()` -- Return iterator to the last element in the vector and iterate towards the first element  
