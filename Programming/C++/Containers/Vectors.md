@@ -71,6 +71,12 @@ int main() {
 ### RANGE-BASED FOR LOOP
 Simplest way to loop through vectors with less flexibility.
 ```cpp
+for (std::vector<int>& number : numbers) {
+    std::cout << number << std::endl;
+}
+
+// OR YOU CAN USE AUTO
+
 for (auto& number : numbers) {
     std::cout << number << std::endl;
 }
@@ -80,6 +86,12 @@ for (auto& number : numbers) {
 Loop through vector using iterators.
 ```cpp
 for (std::vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
+    std::cout << *it << std::endl;
+}
+
+// OR YOU CAN USE AUTO
+
+for (auto it = numbers.begin(); it != numbers.end(); ++it) {
     std::cout << *it << std::endl;
 }
 ```
