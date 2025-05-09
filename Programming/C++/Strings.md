@@ -1,4 +1,5 @@
 # STRINGS
+Using Null-Terminated Character Sequences.  
 ## character array
 ```cpp
 #include <iostream>
