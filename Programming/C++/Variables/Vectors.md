@@ -1,0 +1,53 @@
+# Arrays
+## Member Functions
+Capacity:
+`capacity()` -- Allocated size for the vector \
+`size()` -- Number of elements currently stored in the vector \
+`empty()` -- Returns a boolean of whether the vector is empty or not \
+
+Modifiers:
+`push_back()` -- Add element to the end of the vector \
+`pop_back()` -- Remove last element in the vector \
+`insert(const iterator position, const value_type& value)` -- Add `value` to `position` \
+
+** THESE MEMBER FUNCTIONS ARE ONES I COMMONLY USE AND ALLOW ME TO DO MOST OF THE CODING I HAVE TO DO.
+FOR A FULL DETAILED INFORMATION ON VECTORS, SEE [THIS LINK](https://cplusplus.com/reference/vector/vector/)
+
+## Example
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers;
+
+    std::cout << "Adding 5 integers into the vector..." << std::endl;
+    for (unsigned int i = 0; i < 5; ++i) {
+        numbers.push_back(i);
+    }
+
+    std::cout << "This vector contains the following integers:" << std::endl;
+    for (unsigned int& number : numbers) {
+        std::cout << number << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "The capacity of this vector is " << numbers.capacity() << std::endl;
+    std::cout << "The size of this vector is " << numbers.size() << std::endl;
+
+    std::cout << std::endl;
+
+    std::cout << "Removing integers from the vector..." << std::endl;
+    for (unsigned int i = 0; i < numbers.size(); ++i) {
+        numbers.pop_back(i);
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "The new capacity of this vector is " << numbers.capacity() << std::endl;
+    std::cout << "The new size of this vector is " << numbers.size() << std::endl;
+
+    std::cout << std::endl;
+}
+```
