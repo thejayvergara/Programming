@@ -57,6 +57,28 @@ int main() {
 
 ## std::mutex::lock_guard()
 ```cpp
+#include <thread>
+#include <mutex>
+
+void runOnThread(unsigned int acctBalance) {
+    std::lock_guard<std::mutex> lg<m>;
+    acctBalance += 50;
+}
+
+int main() {
+    std::mutex m;
+    unsigned int numOfThreads = 3;
+    unsigned int acctBalance = 0;
+
+    std::vector<std::thread> threads;
+    for (unsigned int i = 0; i < numOfThreads; ++i) {
+        threads.emplace_back(runOnThread, acctBalance);
+    }
+
+    for (std::vector<std::thread>& thread : threads) {
+        if (thread.joinable()) thread.join();
+    }
+}
 ```
 
 ## std::mutex::unique_lock()
