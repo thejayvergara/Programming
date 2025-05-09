@@ -1,14 +1,14 @@
 # Arrays
 ## Member Functions
-**Capacity:**  
+**CAPACITY:**  
 `capacity()` -- Allocated size for the vector  
 `size()` -- Number of elements currently stored in the vector  
 `empty()` -- Returns a boolean of whether the vector is empty or not  
 
-**Modifiers:**  
+**MODIFIERS:**  
 `push_back()` -- Add element to the end of the vector  
 `pop_back()` -- Remove last element in the vector  
-`insert(const iterator position, const value_type& value)` -- Add `value` to `position`  
+`insert(const iterator position, const value_type& value)` -- Add `value` to `position` in the vector  
 
 ***WARNING:*** *These member functions are ones I commonly use and allows me to do bulk of my work.
 For a full detailed information on vectors, see [THIS LINK](https://cplusplus.com/reference/vector/vector)*
