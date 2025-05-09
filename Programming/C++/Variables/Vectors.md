@@ -10,7 +10,7 @@
 `pop_back()` -- Remove last element in the vector  
 `insert(const iterator position, const value_type& value)` -- Add `value` to `position`  
 
-***WARNING:*** These member functions are ones I commonly use and allows me to do bulk of my work.
+***WARNING:*** *These member functions are ones I commonly use and allows me to do bulk of my work.
 For a full detailed information on vectors, see [THIS LINK](https://cplusplus.com/reference/vector/vector)*
 
 ## Example
