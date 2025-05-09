@@ -1,0 +1,1 @@
+Since I keep forgetting everything I learn, I decided to make a reference for myself and anyone else interested.
