@@ -2,9 +2,10 @@
 ## character array
 ```cpp
 char myName [] = {'J','a','y',' ','V','e','r','g','a','r','a','\0'};
+```
 
-// OR
-
+## character array using string-literals
+```cpp
 char myName [] = "Jay Vergara";
 ```
 
