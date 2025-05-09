@@ -23,7 +23,7 @@ int main() {
     }
 
     // Free up allocated memory to prevent memory leak
-    delete numbers;
+    delete[] numbers;
     return 0;
 }
 ```
