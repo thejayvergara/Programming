@@ -1,5 +1,5 @@
 # STRINGS
-Using Null-Terminated Character Sequences.  
+Using Null-Terminated Character Sequences (NTCS).  
 ## character array
 ```cpp
 #include <iostream>
