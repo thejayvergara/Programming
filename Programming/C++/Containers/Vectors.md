@@ -1,10 +1,20 @@
 # VECTORS
 ## Member Functions
+**ITERATORS:**
+`begin()` -- Return iterator to the first element in the vector  
+`end()`  -- Return iterator to the last element in the vector  
+`rbegin()` -- Return iterator to the last element in the vector and iterate towards the first element  
+
 **CAPACITY:**  
 `capacity()` -- Allocated size for the vector  
 `size()` -- Number of elements currently stored in the vector  
 `empty()` -- Returns a boolean of whether the vector is empty or not  
-`shrink_to_fit` -- Shrink the capacity to the size of the vector  
+`shrink_to_fit()` -- Shrink the capacity to the size of the vector  
+
+**ELEMENT ACCESS::**  
+`at()` -- Access element at a specific position  
+`front()` -- Access the first element in the vector  
+`back()` -- Access the last element in the vector
 
 **MODIFIERS:**  
 `assign()` -- Assigns a value to an element in the vector  
@@ -54,5 +64,30 @@ int main() {
     std::cout << "The new size of this vector is " << numbers.size() << std::endl;
 
     std::cout << std::endl;
+}
+```
+
+## WAYS TO LOOP THROUGH VECTORS
+### RANGE-BASED FOR LOOP
+Simplest way to loop through vectors with less flexibility.
+```cpp
+for (auto& number : numbers) {
+    std::cout << number << std::endl;
+}
+```
+
+### ITERATOR LOOP
+Loop through vector using iterators.
+```cpp
+for (std::vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
+    std::cout << *it << std::endl;
+}
+```
+
+### FOR LOOP
+Old and traditional style of looping through vectors.
+```cpp
+for (unsigned int i = 0; i < numbers.size(); ++i) {
+    std::cout << "Position " << i << " contains " << numbers[i] << std::endl;
 }
 ```
