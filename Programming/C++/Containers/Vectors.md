@@ -80,7 +80,7 @@ for (auto& number : numbers) {
 }
 ```
 
-### ITERATOR LOOP
+### ITERATORS
 Loop through vector using iterators.
 ```cpp
 for (std::vector<int>::iterator it = numbers.begin(); it != numbers.end(); ++it) {
@@ -94,7 +94,7 @@ for (auto it = numbers.begin(); it != numbers.end(); ++it) {
 }
 ```
 
-### FOR LOOP
+### INDEX-BASED FOR LOOP
 Old and traditional style of looping through vectors.
 ```cpp
 for (unsigned int i = 0; i < numbers.size(); ++i) {
