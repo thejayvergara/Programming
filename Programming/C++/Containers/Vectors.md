@@ -4,11 +4,16 @@
 `capacity()` -- Allocated size for the vector  
 `size()` -- Number of elements currently stored in the vector  
 `empty()` -- Returns a boolean of whether the vector is empty or not  
+`shrink_to_fit` -- Shrink the capacity to the size of the vector  
 
 **MODIFIERS:**  
+`assign()` -- Assigns a value to an element in the vector  
 `push_back()` -- Add element to the end of the vector  
+`insert()` -- Add element to a specific position in the vector  
+`emplace_back()` -- Construct and add element to the end of the vector  
+`emplace()` -- Construct and add element to a specific position in the vector    
 `pop_back()` -- Remove last element in the vector  
-`insert(const iterator position, const value_type& value)` -- Add `value` to `position` in the vector  
+`clear()` -- Remove all elements in the vector  
 
 ***WARNING:*** *These member functions are ones I commonly use and allows me to do bulk of my work.
 For a full detailed information on vectors, see [THIS LINK](https://cplusplus.com/reference/vector/vector)*
