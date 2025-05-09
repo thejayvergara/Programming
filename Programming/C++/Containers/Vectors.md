@@ -28,19 +28,21 @@
 ***WARNING:*** *These member functions are ones I commonly use and allows me to do bulk of my work.
 For a full detailed information on vectors, see [THIS LINK](https://cplusplus.com/reference/vector/vector)*
 
-## Example
+## General Example
 ```cpp
 #include <iostream>
 #include <vector>
 
 int main() {
-    std::vector<int> numbers;
+    std::vector<int> numbers;   // Declare a vector of integers
 
+    // Add 5 integers into the vector
     std::cout << "Adding 5 integers into the vector..." << std::endl;
     for (unsigned int i = 0; i < 5; ++i) {
         numbers.push_back(i);
     }
 
+    // Output contents of the vector using range-based for loop
     std::cout << "This vector contains the following integers:" << std::endl;
     for (unsigned int& number : numbers) {
         std::cout << number << std::endl;
@@ -48,22 +50,18 @@ int main() {
 
     std::cout << std::endl;
 
+    // Display amount of elements that the vector can have
     std::cout << "The capacity of this vector is " << numbers.capacity() << std::endl;
+    // Display amount of elements that the vector CURRENTLY has
     std::cout << "The size of this vector is " << numbers.size() << std::endl;
 
     std::cout << std::endl;
 
+    // Removing all the elements in the vector using traditional for loop
     std::cout << "Removing integers from the vector..." << std::endl;
     for (unsigned int i = 0; i < numbers.size(); ++i) {
         numbers.pop_back(i);
     }
-
-    std::cout << std::endl;
-
-    std::cout << "The new capacity of this vector is " << numbers.capacity() << std::endl;
-    std::cout << "The new size of this vector is " << numbers.size() << std::endl;
-
-    std::cout << std::endl;
 }
 ```
 
