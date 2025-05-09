@@ -61,7 +61,7 @@ int main() {
 #include <mutex>
 
 void runOnThread(unsigned int acctBalance) {
-    std::lock_guard<std::mutex> lg<m>;
+    std::lock_guard<std::mutex> lg(m);
     acctBalance += 50;
 }
 
@@ -82,7 +82,7 @@ int main() {
 ```
 
 ## std::mutex::unique_lock()
-Mutex ownership wrapper and a more flexible version of lock_guard().
+Mutex ownership wrapper and a more flexible version of lock_guard.
 
 Locking Strategies (by default uses `lock()`):
 1. `defer_lock` - do not acquire ownership of mutex
