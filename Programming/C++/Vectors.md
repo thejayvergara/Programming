@@ -1,4 +1,4 @@
-# Arrays
+# VECTORS
 ## Member Functions
 **CAPACITY:**  
 `capacity()` -- Allocated size for the vector  
