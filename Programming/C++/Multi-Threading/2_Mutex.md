@@ -220,11 +220,10 @@ int main() {
     }
 
     // Make sure all threads are ready before continuing
-    {
-        std::unique_lock<std::mutex> lockMain(mainLock);
-        printf("Waiting for all threads to be ready...\n");
-        mainCondition.wait(lockMain, [&runningThreadCount, &numOfThreads] { return runningThreadCount == numOfThreads; });
-    }
+    std::unique_lock<std::mutex> lockMain(mainLock);
+    printf("Waiting for all threads to be ready...\n");
+    mainCondition.wait(lockMain, [&runningThreadCount, &numOfThreads] { return runningThreadCount == numOfThreads; });
+    lockMain.unlock();
     printf("All threads ready...\n");
 
     // Notify all thread they can continue
@@ -236,11 +235,10 @@ int main() {
     printf("All threads running...\n");
 
     // Wait for detached thread to finish
-    {
-        std::unique_lock<std::mutex> lockMain(mainLock);
-        printf("Waiting for all threads to finish...\n");
-        mainCondition.wait(lockMain, [&runningThreadCount] { return runningThreadCount == 0; });
-    }
+    lockMain.lock();
+    printf("Waiting for all threads to finish...\n");
+    mainCondition.wait(lockMain, [&runningThreadCount] { return runningThreadCount == 0; });
+    lockMain.unlock();
     printf("All threads finished...\n");
 
     return 0;
