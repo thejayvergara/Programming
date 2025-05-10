@@ -1,4 +1,4 @@
-# CMD
+# SC
 ```cmd
 sc.exe query
 ```
