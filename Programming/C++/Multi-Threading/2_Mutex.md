@@ -152,16 +152,16 @@ struct ThreadProps {
     int id = 0; // Used to identify thread ID
     int* pRunningThreadCount = nullptr; // Keeps track of running threads
 
-	std::mutex* pMainLock = nullptr; // Mutex to lock main
+    std::mutex* pMainLock = nullptr; // Mutex to lock main
     std::condition_variable* pMainCondition = nullptr; // Condition variable to notify main to continue or wait
 
-	bool* pThreadsReady = nullptr; // Flag to indicate if threads are ready
-	std::mutex* pThreadsReadyLock = nullptr; // Mutex to lock the threads ready flag
-	std::condition_variable* pThreadsReadyCondition = nullptr; // Condition variable to notify threads to continue or wait
+    bool* pThreadsReady = nullptr; // Flag to indicate if threads are ready
+    std::mutex* pThreadsReadyLock = nullptr; // Mutex to lock the threads ready flag
+    std::condition_variable* pThreadsReadyCondition = nullptr; // Condition variable to notify threads to continue or wait
 };
 
 void runOnThread(ThreadProps* threadProps) {
-	// Increment the number of running threads in a thread-safe manner and let main know
+    // Increment the number of running threads in a thread-safe manner and let main know
     {
         std::unique_lock<std::mutex> lockMain(*threadProps->pMainLock);
         (*threadProps->pRunningThreadCount)++;
@@ -169,59 +169,59 @@ void runOnThread(ThreadProps* threadProps) {
     }
     printf("Thread %d is ready\n", threadProps->id);
 
-	// Wait for all threads to be ready before continuing
+    // Wait for all threads to be ready before continuing
     {
-		std::unique_lock<std::mutex> lockReady(*threadProps->pThreadsReadyLock);
+        std::unique_lock<std::mutex> lockReady(*threadProps->pThreadsReadyLock);
         threadProps->pThreadsReadyCondition->wait(lockReady , [&threadProps] { return *threadProps->pThreadsReady; });
     }
     printf("Thread %d is running\n", threadProps->id);
 
-	// Decrement the number of running threads in a thread-safe manner and let main know
+    // Decrement the number of running threads in a thread-safe manner and let main know
     {
-		std::unique_lock<std::mutex> lockMain(*threadProps->pMainLock);
-		(*threadProps->pRunningThreadCount)--;
+        std::unique_lock<std::mutex> lockMain(*threadProps->pMainLock);
+        (*threadProps->pRunningThreadCount)--;
         threadProps->pMainCondition->notify_one();
     }
     printf("Thread count is %d\n", *threadProps->pRunningThreadCount);
 }
 
 int main() {
-	int numOfThreads = 3;   // Number of threads to run
-	int runningThreadCount = 0; // Number of running threads
-	bool threadsReady = false; // Flag to indicate if threads are ready
+    int numOfThreads = 3;   // Number of threads to run
+    int runningThreadCount = 0; // Number of running threads
+    bool threadsReady = false; // Flag to indicate if threads are ready
 
-	// Create mutex and condition variable for main thread
+    // Create mutex and condition variable for main thread
     std::mutex mainLock;
     std::condition_variable mainCondition;
 
-	// Create mutex and condition variable for thread readiness
-	std::mutex threadsReadyLock;
-	std::condition_variable threadsReadyCondition;
+    // Create mutex and condition variable for thread readiness
+    std::mutex threadsReadyLock;
+    std::condition_variable threadsReadyCondition;
 
     // Create a vector for thread properties
-	std::vector<ThreadProps> perThreadProps(numOfThreads);
+    std::vector<ThreadProps> perThreadProps(numOfThreads);
 
     // Initialize thread properties
     for (int i = 0; i < numOfThreads; ++i) {
-		perThreadProps[i].id = i;
+        perThreadProps[i].id = i;
         perThreadProps[i].pRunningThreadCount = &runningThreadCount;
 
-		perThreadProps[i].pThreadsReady = &threadsReady;
-		perThreadProps[i].pThreadsReadyLock = &threadsReadyLock;
-		perThreadProps[i].pThreadsReadyCondition = &threadsReadyCondition;
+        perThreadProps[i].pThreadsReady = &threadsReady;
+        perThreadProps[i].pThreadsReadyLock = &threadsReadyLock;
+        perThreadProps[i].pThreadsReadyCondition = &threadsReadyCondition;
 
         perThreadProps[i].pMainLock = &mainLock;
-		perThreadProps[i].pMainCondition = &mainCondition;
+        perThreadProps[i].pMainCondition = &mainCondition;
     }
 
     // Run 3 detached threads
     for (int i = 0; i < numOfThreads; ++i) {
-		std::thread(runOnThread, &perThreadProps[i]).detach();
+        std::thread(runOnThread, &perThreadProps[i]).detach();
     }
 
     // Make sure all threads are ready before continuing
     {
-		std::unique_lock<std::mutex> lockMain(mainLock);
+        std::unique_lock<std::mutex> lockMain(mainLock);
         printf("Waiting for all threads to be ready...\n");
         mainCondition.wait(lockMain, [&runningThreadCount, &numOfThreads] { return runningThreadCount == numOfThreads; });
     }
@@ -229,7 +229,7 @@ int main() {
 
     // Notify all thread they can continue
     {
-		std::unique_lock<std::mutex> lockReady(threadsReadyLock);
+        std::unique_lock<std::mutex> lockReady(threadsReadyLock);
         threadsReady = true;
         threadsReadyCondition.notify_all();
     }
@@ -237,11 +237,11 @@ int main() {
 
     // Wait for detached thread to finish
     {
-		std::unique_lock<std::mutex> lockMain(mainLock);
-		printf("Waiting for all threads to finish...\n");
-		mainCondition.wait(lockMain, [&runningThreadCount] { return runningThreadCount == 0; });
+        std::unique_lock<std::mutex> lockMain(mainLock);
+        printf("Waiting for all threads to finish...\n");
+        mainCondition.wait(lockMain, [&runningThreadCount] { return runningThreadCount == 0; });
     }
-	printf("All threads finished...\n");
+    printf("All threads finished...\n");
 
     return 0;
 }
