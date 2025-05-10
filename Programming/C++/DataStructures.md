@@ -7,7 +7,7 @@ struct person {
     int age = -1;
     std::string firstName;
     std::string lastName;
-}
+};
 
 int main() {
     person p1, p2;
