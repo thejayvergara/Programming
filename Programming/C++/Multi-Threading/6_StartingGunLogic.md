@@ -1,5 +1,5 @@
 # STARTING GUN LOGIC
-Starting gun logic sample for one of my assignments. Currently trying to figure out why it's causing deadlock or if it should be causing deadlocks by design.
+Starting gun logic sample for one of my assignments.
 ```cpp
 #include <thread>
 #include <mutex>
