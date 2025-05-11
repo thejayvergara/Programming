@@ -16,6 +16,7 @@ struct ThreadPool {
 
     int* pNumOfThreads = nullptr;
     int readyThreadCount = 0;
+    bool threadsReady = false;
 
     std::mutex threadCountMutex;
     std::condition_variable threadCountVar;
@@ -37,9 +38,8 @@ void runOnThread(ThreadProps* pThreadProps) {
     printf("Thread %d ready\n", pThreadProps->id);
 
     // Wait until all threads are ready
-    pThreadProps->pThreadPool->threadGunVar.wait(
-        lockThreadGun, [&pThreadProps] {
-        return pThreadProps->pThreadPool->readyThreadCount == *pThreadProps->pThreadPool->pNumOfThreads;
+    pThreadProps->pThreadPool->threadGunVar.wait(lockThreadGun, [&pThreadProps] {
+        return pThreadProps->pThreadPool->threadsReady;
     });
     lockThreadGun.unlock();
 
@@ -84,6 +84,8 @@ int main() {
     poolOfThreads.threadCountVar.wait(lockThreadCount, [&poolOfThreads, numOfThreads] {
         return poolOfThreads.readyThreadCount == numOfThreads;
     });
+    poolOfThreads.threadsReady = true;
+    poolOfThreads.threadCountVar.notify_all();
     lockThreadCount.unlock();
 
     // Notify all waithing threads that they can start
