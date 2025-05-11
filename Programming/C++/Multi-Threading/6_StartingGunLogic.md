@@ -5,6 +5,7 @@ Starting gun logic sample for one of my assignments.
 #include <mutex>
 #include <condition_variable>
 #include <vector>
+#include <stdio.h>
 
 struct ThreadProps {
     int id = 0;
