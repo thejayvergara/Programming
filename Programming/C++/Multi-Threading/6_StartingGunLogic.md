@@ -85,13 +85,13 @@ int main() {
     poolOfThreads.threadCountVar.wait(lockThreadCount, [&poolOfThreads, numOfThreads] {
         return poolOfThreads.readyThreadCount == numOfThreads;
     });
-    poolOfThreads.threadsReady = true;
     poolOfThreads.threadCountVar.notify_all();
     lockThreadCount.unlock();
 
     // Notify all waithing threads that they can start
     {
         std::lock_guard<std::mutex> lockGun(poolOfThreads.threadGunMutex);
+        poolOfThreads.threadsReady = true;
         poolOfThreads.threadGunVar.notify_all();
     }
 
