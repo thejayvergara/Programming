@@ -195,7 +195,19 @@ do
 done
 ```
 
+## UNTIL LOOP
+```bash
+```
+
 ## STRING LENGTH
 ```bash
 ${#string}
+```
+
+## DECLARING A FUNCTION
+```bash
+function $function_name {
+	# YOUR CODE HERE
+}
+$
 ```
