@@ -223,3 +223,8 @@ function $function_name {
 }
 $
 ```
+
+## DEBUGGING
+```bash
+bash -x -v $program
+```
