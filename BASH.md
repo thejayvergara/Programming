@@ -189,14 +189,26 @@ done
 
 ## WHILE LOOP
 ```bash
-while [ true ]
+counter=0
+while [ $counter -lt 10 ]
 do
-	echo "Saying Hello World Forever!\n"
+	((counter++))
+	echo "Counter: $counter"
+	if [ $counter == 4 ]
+	then
+		break
+	fi
 done
 ```
 
 ## UNTIL LOOP
 ```bash
+counter=0
+until [ $counter -eq 10 ]
+	((counter++))
+	echo "Counter: $counter"
+do
+done
 ```
 
 ## STRING LENGTH
