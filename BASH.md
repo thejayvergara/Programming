@@ -195,7 +195,7 @@ do
 done
 ```
 
-# STRING LENGTH
+## STRING LENGTH
 ```bash
 ${#string}
 ```
